@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terabox Video Player</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        input {
+            width: 60%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .video-container {
+            margin-top: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+    </style>
+    <script>
+        function extractAndPlay() {
+            let inputUrl = document.getElementById("teraboxUrl").value;
+            let match = inputUrl.match(/s\/([A-Za-z0-9-_]+)/);
+            
+            if (match && match[1]) {
+                let videoId = match[1];
+                let embedUrl = `https://www.1024terabox.com/sharing/embed?surl=${videoId}&autoplay=true&mute=false`;
+                document.getElementById("videoFrame").src = embedUrl;
+            } else {
+                alert("Invalid URL format. Please enter a valid Terabox link.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Enter Terabox Link</h2>
+    <input type="text" id="teraboxUrl" placeholder="Enter Terabox URL here">
+    <button onclick="extractAndPlay()">Play Video</button>
+    
+    <div class="video-container">
+        <h3>Video Player</h3>
+        <iframe id="videoFrame" width="800" height="450" frameborder="0" allowfullscreen></iframe>
+    </div>
+</body>
+</html>
