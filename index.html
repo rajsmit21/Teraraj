@@ -42,6 +42,11 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             display: inline-block;
         }
+        iframe {
+            width: 800px;
+            height: 450px;
+            border: none;
+        }
     </style>
     <script>
         function extractAndPlay() {
@@ -51,7 +56,13 @@
             if (match && match[1]) {
                 let videoId = match[1];
                 let embedUrl = `https://www.1024terabox.com/sharing/embed?surl=${videoId}&autoplay=true&mute=false`;
-                document.getElementById("videoFrame").src = embedUrl;
+                
+                let iframe = document.getElementById("videoFrame");
+                iframe.src = embedUrl;
+                
+                // Prevent ad popups and unwanted redirects
+                iframe.setAttribute("sandbox", "allow-scripts allow-same-origin allow-presentation");
+                iframe.setAttribute("referrerpolicy", "no-referrer");
             } else {
                 alert("Invalid URL format. Please enter a valid Terabox link.");
             }
@@ -65,7 +76,7 @@
     
     <div class="video-container">
         <h3>Video Player</h3>
-        <iframe id="videoFrame" width="800" height="450" frameborder="0" allowfullscreen></iframe>
+        <iframe id="videoFrame" allowfullscreen></iframe>
     </div>
 </body>
 </html>
